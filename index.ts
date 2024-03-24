@@ -209,3 +209,44 @@ const res5 = uniqueDataTypesFunc<number>(10, 20);
 console.log(res5);
 
 //type narrowing
+type MyType = string | number;
+
+//this is called a type guard
+function exampleFunction1(value: MyType): void {
+  if (typeof value === 'string') {
+    console.log(value.toLocaleUpperCase());
+  } else {
+    console.log(value.toFixed(2));
+  }
+}
+
+exampleFunction1('hello');
+exampleFunction1(4);
+
+//intersection type guard this way we are narrowing all the people we can hit
+type human = {
+  gender: string;
+  nationality: string;
+};
+
+type who = {
+  name: string;
+  age: number;
+};
+
+type whom = human & who;
+
+const person1: whom = {
+  gender: 'male',
+  nationality: 'uk',
+  name: 'henry',
+  age: 32,
+};
+
+//how to complie it to js open terminal
+//tsc -init
+//tsc (the file you wanna compile)
+//we need to do something in the config file to help the code a bit
+//find target in the tsconfig.JSON file and change it to ES6
+//now we only need to write tsc to compile it
+//the reason we do this is to get the most up to date js code, the standard set for it uses stuff like var instead of let and const and it might ruin some of your scoops
